@@ -1,0 +1,66 @@
+package linklist;
+
+public class Reverse2 {
+	static Node head;
+		    public static void printList(String msg, Node head)
+		    {
+		        System.out.print(msg);
+		 
+		        Node ptr = head;
+		        while (ptr != null)
+		        {
+		            System.out.print(ptr.data + "  ");
+		            ptr = ptr.next;
+		        }
+		 
+		        System.out.println("");
+		    }
+		    public static Node reverse(Node head, int m, int n)
+		    {
+		        // base case
+		        if (m > n) {
+		            return head;
+		        }
+		 
+		        Node prev = null;
+		        Node curr = head;
+		        for (int i = 1; curr != null && i < m; i++)
+		        {
+		            prev = curr;
+		            curr = curr.next;
+		        }
+		 
+		        Node start = curr;
+		        Node end = null;
+		        for (int i = 1; curr != null && i <= n - m + 1; i++)
+		        {
+		            Node next = curr.next;
+		            curr.next = end;
+		            end = curr;
+		            curr = next;
+		        }
+		        if (start != null)
+		        {
+		            start.next = curr;
+		            if (prev != null) {
+		                prev.next = end;
+		            }
+		            else {
+		                head = end; 
+		            }
+		        }
+		 
+		        return head;
+		    }
+		 
+		    public static void main(String[] args)
+		    {
+		        int m = 5, n = 7;
+		        for (int i = 0; i <= 7; i++) {
+		            head = new Node(i,head);
+		        }
+		 
+		        printList("Original linked list: ", head);
+		        head = reverse(head, m, n);
+		    }
+		}
